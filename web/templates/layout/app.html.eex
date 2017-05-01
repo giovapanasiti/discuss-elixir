@@ -8,11 +8,23 @@
     <meta name="author" content="">
 
     <title>Hello Discuss!</title>
+
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
   </head>
 
   <body>
-    <div class="container">
+    <nav class="light-blue">
+      <nav class="nav-wrapper container">
+        <a href="" class="brand-logo">
+          Discussions
+        </a>
+      </nav>
+    </nav>
+
+
+    <!-- <div class="container">
       <header class="header">
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
@@ -20,7 +32,7 @@
           </ul>
         </nav>
         <span class="logo"></span>
-      </header>
+      </header> -->
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
