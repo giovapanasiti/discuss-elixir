@@ -16,11 +16,11 @@
 
   <body>
     <nav class="light-blue">
-      <nav class="nav-wrapper container">
+      <div class="nav-wrapper container">
         <a href="" class="brand-logo">
           Discussions
         </a>
-      </nav>
+      </div>
     </nav>
 
 
