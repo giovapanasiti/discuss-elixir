@@ -18,6 +18,7 @@ defmodule Discuss.Router do
 
     get "/", PageController, :index
     get "/topics/new", TopicController, :new
+    post "/topics", TopicController, :create # here we submit the form
   end
 
 
