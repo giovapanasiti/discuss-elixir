@@ -20,7 +20,14 @@ defmodule Discuss.TopicController do
     # we are going to create a changeset
     changeset = Topic.changeset(%Topic{}, topic)
     # insertion in the database
-    Repo.insert(changeset)
+    case Repo.insert(changeset) do
+      {:ok, post} -> IO.inspect(post)
+      {:error, changeset} ->
+        render conn, "new.html", changeset: changeset
+        # we want to render the form again and show an rror message
+    end
+    # we need to verify whether or not if the insertion went good
+
   end
 
 end
