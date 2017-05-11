@@ -6,6 +6,13 @@ defmodule Discuss.TopicController do
   # def index(conn, _params) do
   #   render conn, "index.html"
   # end
+  #
+
+  def index(conn, _params) do
+      topics = Repo.all(Topic)
+
+      render conn, "index.html", topics: topics
+  end
 
   def new(conn, _params) do
     changeset = Topic.changeset(%Topic{}, %{})
@@ -21,13 +28,15 @@ defmodule Discuss.TopicController do
     changeset = Topic.changeset(%Topic{}, topic)
     # insertion in the database
     case Repo.insert(changeset) do
-      {:ok, post} -> IO.inspect(post)
+      {:ok, post} ->
+        conn
+        |> put_flash(:info, "Topic Created!")
+        |> redirect(to: topic_path(conn, :index))
       {:error, changeset} ->
         render conn, "new.html", changeset: changeset
         # we want to render the form again and show an rror message
     end
     # we need to verify whether or not if the insertion went good
-
   end
 
 end
