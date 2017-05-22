@@ -39,4 +39,18 @@ defmodule Discuss.TopicController do
     # we need to verify whether or not if the insertion went good
   end
 
+  def edit(conn, %{"id" => topic_id}) do
+    # the second argoument is a pattern matching on params
+    topic = Repo.get(Topic, topic_id)
+    changeset = Topic.changeset(topic)
+
+    render conn, "edit.html", changeset: changeset, topic: topic
+    # we are passing the entire topic and the only reason is to generate the right path
+    # when we generate the form
+  end
+
+  def update(conn, %{"id" => topic_id}) do
+
+  end
+
 end
