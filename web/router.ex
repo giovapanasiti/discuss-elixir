@@ -17,11 +17,12 @@ defmodule Discuss.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", TopicController, :index
-    get "/topics/new", TopicController, :new
-    post "/topics", TopicController, :create # here we submit the form
-    # get "/topics", TopicController, :index
-    get "/topics/:id/edit", TopicController, :edit
-    put "/topics/:id", TopicController, :update
+    # get "/topics/new", TopicController, :new
+    # post "/topics", TopicController, :create # here we submit the form
+    # # get "/topics", TopicController, :index
+    # get "/topics/:id/edit", TopicController, :edit
+    # put "/topics/:id", TopicController, :update
+    resources "/topics", TopicController
   end
 
 
