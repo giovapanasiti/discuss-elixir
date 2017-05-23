@@ -28,7 +28,7 @@ defmodule Discuss.TopicController do
     changeset = Topic.changeset(%Topic{}, topic)
     # insertion in the database
     case Repo.insert(changeset) do
-      {:ok, post} ->
+      {:ok, _topic} ->
         conn
         |> put_flash(:info, "Topic Created!")
         |> redirect(to: topic_path(conn, :index))
@@ -49,7 +49,24 @@ defmodule Discuss.TopicController do
     # when we generate the form
   end
 
-  def update(conn, %{"id" => topic_id}) do
+# we pull out the topic from the params and it will be an hash of new attributes the user entered in the form.
+  def update(conn, %{"id" => topic_id, "topic" => topic}) do
+
+    old_topic = Repo.get(Topic, topic_id)
+    # changeset = Topic.changeset(old_topic, topic)
+    # refactor -->
+
+    changeset = Repo.get(Topic, topic_id) |> Topic.changeset(topic)
+
+    case Repo.update(changeset) do
+      {:ok, _topic} ->
+        conn
+        |> put_flash(:info, "Topic Updated")
+        |> redirect(to: topic_path(conn, :index))
+      {:error, changeset} ->
+      render conn, "edit.html", changeset: changeset, topic: old_topic
+
+    end
 
   end
 
